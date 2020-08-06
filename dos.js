@@ -10,44 +10,54 @@ Al finalizar, se debe informar:
 Considerar que las categorías pueden ser: almacen, lácteos, limpieza o bebidas y que el precio no puede ser menor a 0 ni mayor a 1000.
 */
 
-function mostrar()
-{
+function mostrar() {
 	let nombreArticulo;
 	let categoria;
-	let precio;
-	let respuesta = 'n';
-	let cantArticulos;
-	let articulos;
-	
-	prompt("desea ingresar un articulo? s/n");
+	let pIngresado;
+	let pArticulo = 0;
+	let masCaro;
+	let pLacteos;
+	let cBebidas=0;
+	let respuesta;
 
-	while(respuesta == 's'){
-		alert("las categorias validas son almacen, lácteos, limpieza o bebidas y el precio no puede ser menor a 0 ni mayor a 1000");   
+	respuesta = prompt("desea ingresar un articulo? s/n");
+
+	while (respuesta == 's') {
+		alert("las categorias validas son almacen, lácteos, limpieza o bebidas y el precio no puede ser menor a 0 ni mayor a 1000");
 		
 		nombreArticulo = prompt("ingrese nombre de articulo:");
-		
-		if(precio>0 && precio<1000){
-		precio = parseInt(prompt("ingrese precio de articulo:"));
-		}else{
+
+		pIngresado = parseInt(prompt("ingrese precio de articulo:"));
+		if (pIngresado < 0 && pIngresado > 1000) {
 			alert("precio fuera de rango");
+		} else if (pIngresado > pArticulo) {
+			masCaro = nombreArticulo;
 		}
 		
-		switch(categoria){
-			case almacen:
-			case lácteos:
-			case limpieza:
-			case bebidas:
-				categoria = prompt("ingrese categoria de articulo:");
+		categoria = prompt("ingrese categoria de articulo:");
+		switch (categoria) {
+			case "almacen":
+			case "limpieza":
+				break;
+			case "lacteos":
+				if (pIngresado > pArticulo){
+					pLacteos = nombreArticulo;
+				}
+				break;
+			case "bebidas":
+				cBebidas++;
 				break;
 			default:
 				alert("categoria no valida");
+				break;
 		}
-		cantArticulos++;
-		articulos += nombreArticulo;
 
-		
+		pArticulo = pIngresado;
+
+		respuesta = prompt("desea ingresar un articulo? s/n");
 	}
+		alert("el aticulo mas caro es: " + masCaro+" "+pArticulo);
+		alert("el aticulo mas caro de lacteos es: " + pLacteos);
+		alert("la cantidad de bebidas ingresadas es de " + cBebidas);
 
-	alert("la cantidad de articulos ingresados es de "+cantArticulos);
-	
 }
